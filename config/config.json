@@ -4,7 +4,7 @@
     "password": "6ea4652c32e75a95db4089393b2f15e12026af576007328b180cad80533dee31",
     "database": "d5or79t40jfd7i",
     "host": "ec2-52-21-0-111.compute-1.amazonaws.com",
-    "dialect": "mysql",
+    "dialect": "postgras",
     "operatorsAliases": false
   },
   "test": {
