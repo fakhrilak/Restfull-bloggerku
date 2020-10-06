@@ -16,7 +16,7 @@
     "operatorsAliases": false
   },
   "production": {
-    "use_env_variable": "postgres://bvzgwlhvvyccex:6ea4652c32e75a95db4089393b2f15e12026af576007328b180cad80533dee31@ec2-52-21-0-111.compute-1.amazonaws.com:5432/d5or79t40jfd7i",
+    "use_env_variable": "DATABASE_URL",
     "dialect": "postgres",
     "protocol": "postgras",
     "dialectOption":{
