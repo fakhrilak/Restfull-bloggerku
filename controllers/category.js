@@ -11,7 +11,7 @@ exports.getCategory = async (req,res)=>{
 				model: Content,
 				as: 'content',
 				attributes: {
-					exclude: [ 'createdAt', 'updatedAt', 'password' ]
+					exclude: [ 'createdAt', 'updatedAt']
 				}
 			}
             
