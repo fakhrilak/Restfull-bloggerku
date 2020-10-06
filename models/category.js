@@ -6,9 +6,6 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING
   }, {});
   Category.associate = function(models) {
-   Category.hasMany(models.Content,{
-     as: 'content'
-   })
   };
   return Category;
 };

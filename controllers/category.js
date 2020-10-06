@@ -6,14 +6,7 @@ exports.getCategory = async (req,res)=>{
         const category = await Category.findAll({
             attributes: {
 				exclude: [ 'createdAt', 'updatedAt' ]
-            },
-            include: {
-				model: Content,
-				as: 'content',
-				attributes: {
-					exclude: [ 'createdAt', 'updatedAt']
-				}
-			}
+            }
             
         })
         if (!category){
