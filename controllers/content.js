@@ -23,7 +23,7 @@ exports.getContent = async(req,res)=>{
         }
 
         return res.status(200).send({
-            massage:'Get All Category Succes',
+            massage:'Get All Content Succes',
             data:content
         })
     }catch(error){
@@ -86,31 +86,9 @@ exports.addContent = async (req,res) =>{
             ...req.body
         })
 
-        if (!content){
-            return res.status(400).send({
-                error:{
-                    massage: 'Try Again'
-                }
-            })
-        }
-            const contentResult = await Content.findOne({
-				where: {
-					id: content.id
-				},
-				include: {
-					model: Category,
-					as: 'category',
-					attributes: {
-						exclude: [ 'createdAt', 'updatedAt']
-					}
-				},
-				attributes: {
-					exclude: [ 'createdAt', 'updatedAt' ]
-                }
-            })
             return res.status(200).send({
                 massage:'Content Berhasil ditambah',
-                data:contentResult
+                data:content
             })
     }catch(error){
         console.log(error)
