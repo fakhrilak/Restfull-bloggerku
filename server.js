@@ -12,7 +12,4 @@ app.use(express.json());
 
 app.use('/api/bloggerku', router);
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-  })
 app.listen(port, () => console.log(`Server is running at http://localhost:${port}`));

@@ -111,7 +111,3 @@ exports.Register = async (req, res) => {
 		return res.status(500).send({ message: error });
 	}
 };
-
-exports.coba = async (req,res) =>{
-	res.send('hello from the other side')
-}
