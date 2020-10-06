@@ -6,12 +6,6 @@ exports.getContent = async(req,res)=>{
         const content = await Content.findAll({
             attributes: {
 				exclude: [ 'createdAt', 'updatedAt','categoryId' ]
-			},include: {
-				model: Category,
-				as: 'category',
-				attributes: {
-					exclude: [ 'createdAt', 'updatedAt', 'password' ]
-				}
 			}
         })
         if (!content){
@@ -69,7 +63,7 @@ exports.addContent = async (req,res) =>{
             img: Joi.string().required(),
             text: Joi.string().required(),
             title: Joi.string().required(),
-            categoryId: Joi.number().required()
+            category: Joi.string().required()
         })
 
         const {error} = schema.validate(req.body);
@@ -86,10 +80,18 @@ exports.addContent = async (req,res) =>{
             ...req.body
         })
 
-            return res.status(200).send({
-                massage:'Content Berhasil ditambah',
-                data:content
+        if (!content){
+            return res.status(400).send({
+                error:{
+                    massage: 'Try Again'
+                }
             })
+        }else{
+        return res.status(200).send({
+            massage:'Content Berhasil ditambah',
+            data:content
+        })
+    }
     }catch(error){
         console.log(error)
         return res.status(500).send({

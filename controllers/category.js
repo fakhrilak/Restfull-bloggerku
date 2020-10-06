@@ -16,11 +16,13 @@ exports.getCategory = async (req,res)=>{
                 }
             })
         }
-
-        return res.status(200).send({
+        else{
+           return res.status(200).send({
             massage:'Get All Category Succes',
             data:category
-        })
+        }) 
+        }
+        
     }catch(error){
         console.log(error)
         return res.status(500).send({
