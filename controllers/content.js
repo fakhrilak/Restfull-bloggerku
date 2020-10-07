@@ -1,11 +1,18 @@
-const {Category,Content} = require('../models');
+const {Subcategory,Content} = require('../models');
 const Joi = require('@hapi/joi');
 
 exports.getContent = async(req,res)=>{
     try{
         const content = await Content.findAll({
             attributes: {
-				exclude: [ 'createdAt', 'updatedAt','categoryId' ]
+				exclude: [ 'createdAt', 'updatedAt','subcategoryId' ]
+            },
+            include: {
+				model: Subcategory,
+				as: 'subcategory',
+				attributes: {
+					exclude: [ 'createdAt', 'updatedAt', 'password' ]
+				}
 			}
         })
         if (!content){
@@ -60,10 +67,9 @@ exports.getContentCategory = async (req,res)=>{
 exports.addContent = async (req,res) =>{
     try{
         const schema = Joi.object({
-            img: Joi.string().required(),
             text: Joi.string().required(),
-            title: Joi.string().required(),
-            category: Joi.string().required()
+            no: Joi.string().required(),
+            subcategoryId: Joi.number().required()
         })
 
         const {error} = schema.validate(req.body);

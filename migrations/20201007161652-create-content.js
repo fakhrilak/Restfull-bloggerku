@@ -1,21 +1,28 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Categories', {
+    return queryInterface.createTable('Contents', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      img: {
-        type: Sequelize.STRING
-      },
       text: {
         type: Sequelize.STRING
       },
-      title: {
+      no: {
         type: Sequelize.STRING
+      },
+      subcategoryId: {
+        allowNull: false,
+				type: Sequelize.INTEGER,
+				references: {
+					model: 'Subcategories',
+					key: 'id'
+				},
+				onUpdate: 'CASCADE',
+				onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +35,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Categories');
+    return queryInterface.dropTable('Contents');
   }
 };

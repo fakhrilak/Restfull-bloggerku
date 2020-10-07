@@ -7,6 +7,8 @@ const { Login, Register, Auth} = require('../controllers/auth');
 
 const {getCategory,addCategory} = require('../controllers/category');
 
+const {getSubCategory,addSubCategory} = require('../controllers/subcategory')
+
 const {getContent,addContent,getContentCategory} = require('../controllers/content');
 
 
@@ -22,6 +24,8 @@ router.get('/category', getCategory);
 
 router.post('/content',addContent);
 router.get('/content',getContent);
-router.get('/content/:title',getContentCategory);
+
+router.get('/sub-category',getSubCategory);
+router.post('/sub-category',addSubCategory);
 
 module.exports = router;
