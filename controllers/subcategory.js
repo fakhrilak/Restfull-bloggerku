@@ -70,3 +70,44 @@ exports.addSubCategory = async (req,res)=>{
 
     }
 }
+
+exports.deletSubcategory = async (req,res)=>{
+    try{
+        const {id}=req.params
+        const category = await Subcategory.findOne({
+            where:{
+                id
+            },
+            attributes: {
+				exclude: [ 'createdAt', 'updatedAt' ]
+            }
+            
+        })
+        if (!category){
+            return res.status(400).send({
+                error:{
+                    massage: 'Subcategory not found'
+                }
+            })
+        }else{
+            await category.destroy({
+                where:{
+                    id,
+                },
+            })
+
+            return res.send({
+                data:{
+                    id
+                }
+            })
+        }
+    }catch(err){
+        console.log(error);
+        return res.status(500).send({
+          error: {
+            message: "Server Error",
+          },
+        });
+    }
+}
