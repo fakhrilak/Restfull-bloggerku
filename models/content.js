@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Content = sequelize.define('Content', {
     text: DataTypes.STRING,
     no: DataTypes.STRING,
-    subcategoryId: DataTypes.INTEGER
+    subcategoryId: DataTypes.STRING
   }, {});
   Content.associate = function(models) {
     Content.belongsTo(models.Subcategory, {

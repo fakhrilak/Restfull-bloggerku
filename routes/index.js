@@ -19,14 +19,14 @@ router.post('/login', Login);
 router.get('/auth',auth, Auth);
 
 
-router.post('/category',addCategory);
-router.get('/category', getCategory);
+router.post('/category',auth,addCategory);
+router.get('/category',auth, getCategory);
 
-router.post('/content',addContent);
-router.get('/content',getContent);
+router.post('/content',auth,addContent);
+router.get('/content',auth,getContent);
 
-router.get('/sub-category',getSubCategory);
-router.post('/sub-category',addSubCategory);
-router.delete('/sub-category/:id',deletSubcategory);
+router.get('/sub-category',auth,getSubCategory);
+router.post('/sub-category',auth,addSubCategory);
+router.delete('/sub-category/:id',auth,deletSubcategory);
 
 module.exports = router;

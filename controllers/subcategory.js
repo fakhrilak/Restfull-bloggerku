@@ -35,9 +35,11 @@ exports.getSubCategory = async (req,res)=>{
 
 exports.addSubCategory = async (req,res)=>{
     try{
+        const {title} = req.body;
         const schema = Joi.object({
             category: Joi.string().required(),
-            title: Joi.string().required()
+            title: Joi.string().required(),
+            userId:Joi.number().required()
         })
 
         const {error} = schema.validate(req.body);
@@ -49,7 +51,16 @@ exports.addSubCategory = async (req,res)=>{
                 }
             })
         }
-
+        const SubCategory = await Subcategory.findOne({
+            where:{
+                title
+            }
+        })
+        if(SubCategory){
+            return res.status(400).send({
+                massage:'Subcategory dah ada'
+            })
+        }
         const category = await Subcategory.create({
             ...req.body
         })
