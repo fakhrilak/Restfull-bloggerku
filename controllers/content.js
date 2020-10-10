@@ -76,7 +76,8 @@ exports.addContent = async (req,res) =>{
             body: Joi.string().required(),
             title: Joi.string().required(),
             categoryId: Joi.string().required(),
-            userId: Joi.string().required()
+            userId: Joi.string().required(),
+            date: Joi.string().required()
         })
 
         const {error} = schema.validate(req.body);

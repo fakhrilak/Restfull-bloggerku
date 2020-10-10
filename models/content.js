@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     body: DataTypes.TEXT,
     userId: DataTypes.STRING,
-    categoryId: DataTypes.STRING
+    categoryId: DataTypes.STRING,
+    date: DataTypes.STRING
   }, {});
   Content.associate = function(models) {
     // associations can be defined here
@@ -13,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: {
 				name: 'userId'
 			}
-		});
+		})
   };
   return Content;
 };
