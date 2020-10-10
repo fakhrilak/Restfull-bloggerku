@@ -1,19 +1,13 @@
-const {Subcategory,Content} = require('../models');
+const {Category,Content,User} = require('../models');
 const Joi = require('@hapi/joi');
+
 
 exports.getContent = async(req,res)=>{
     try{
         const content = await Content.findAll({
             attributes: {
 				exclude: [ 'createdAt', 'updatedAt','subcategoryId' ]
-            },
-            include: {
-				model: Subcategory,
-				as: 'subcategory',
-				attributes: {
-					exclude: [ 'createdAt', 'updatedAt', 'password' ]
-				}
-			}
+            }
         })
         if (!content){
             return res.status(400).send({
@@ -35,41 +29,47 @@ exports.getContent = async(req,res)=>{
     }
 }
 
-exports.getContentCategory = async (req,res)=>{
+exports.getContentByUser = async (req,res) =>{
     try{
+        const {userId}=req.params
         const content = await Content.findAll({
             where:{
-                ...req.params
+              userId
             },
             attributes:{
                 exclude: [ 'createdAt', 'updatedAt' ]
+            },
+            include: {
+                model: User,
+                as: 'user',
+                attributes: {
+                    exclude: [ 'createdAt', 'updatedAt', 'password' ]
+                }
             }
         })
-        if(!content){
+        if(content){
+            return res.status(200).send({
+               massage: content 
+            })
+        }else{
             return res.status(400).send({
-                massage:'Content Not Found'
+                massage:'Not Found'
             })
         }
-        return res.status(200).send({
-            massage:'Content by categoryId Success',
-            data:content
-        })
     }catch(error){
-        console.log(error)
         return res.status(500).send({
             massage:'Server Error'
         })
     }
-} 
-
-
+}
 
 exports.addContent = async (req,res) =>{
     try{
         const schema = Joi.object({
-            text: Joi.string().required(),
-            no: Joi.string().required(),
-            subcategoryId: Joi.number().required()
+            body: Joi.string().required(),
+            title: Joi.string().required(),
+            categoryId: Joi.string().required(),
+            userId: Joi.string().required()
         })
 
         const {error} = schema.validate(req.body);
@@ -98,8 +98,8 @@ exports.addContent = async (req,res) =>{
             data:content
         })
     }
-    }catch(error){
-        console.log(error)
+    }catch(err){
+        console.log(err)
         return res.status(500).send({
             massage:'Server Error'
         })

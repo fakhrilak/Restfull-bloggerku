@@ -1,17 +1,19 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Content = sequelize.define('Content', {
-    text: DataTypes.STRING,
-    no: DataTypes.STRING,
-    subcategoryId: DataTypes.STRING
+    title: DataTypes.STRING,
+    body: DataTypes.TEXT,
+    userId: DataTypes.STRING,
+    categoryId: DataTypes.STRING
   }, {});
   Content.associate = function(models) {
-    Content.belongsTo(models.Subcategory, {
-			as: 'subcategory',
+    // associations can be defined here
+    Content.belongsTo(models.User, {
+			as: 'user',
 			foreignKey: {
-				name: 'subcategoryId'
+				name: 'userId'
 			}
-		})
+		});
   };
   return Content;
 };

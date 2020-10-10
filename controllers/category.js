@@ -6,8 +6,7 @@ exports.getCategory = async (req,res)=>{
         const category = await Category.findAll({
             attributes: {
 				exclude: [ 'createdAt', 'updatedAt' ]
-            }
-            
+            }           
         })
         if (!category){
             return res.status(400).send({
@@ -32,8 +31,6 @@ exports.getCategory = async (req,res)=>{
         })
     }
 }
-
-
 exports.addCategory = async(req,res)=>{
     try{
         const schema = Joi.object({

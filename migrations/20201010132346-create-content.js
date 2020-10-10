@@ -8,21 +8,24 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      text: {
+      title: {
         type: Sequelize.STRING
       },
-      no: {
-        type: Sequelize.STRING
+      body: {
+        type: Sequelize.TEXT
       },
-      subcategoryId: {
+      userId: {
         allowNull: false,
 				type: Sequelize.INTEGER,
 				references: {
-          model: 'Subcategories',
-          key: 'id'
+					model: 'Users',
+					key: 'id'
 				},
 				onUpdate: 'CASCADE',
 				onDelete: 'CASCADE'
+      },
+      categoryId: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
