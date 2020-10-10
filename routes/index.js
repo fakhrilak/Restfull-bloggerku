@@ -18,7 +18,7 @@ router.get('/auth',auth, Auth);
 
 
 router.post('/category',auth,addCategory);
-router.get('/category',auth, getCategory);
+router.get('/category',getCategory);
 
 
 router.post('/content',auth,addContent);
