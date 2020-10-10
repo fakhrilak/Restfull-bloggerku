@@ -5,8 +5,15 @@ const Joi = require('@hapi/joi');
 exports.getContent = async(req,res)=>{
     try{
         const content = await Content.findAll({
-            attributes: {
-				exclude: [ 'createdAt', 'updatedAt','subcategoryId' ]
+            attributes:{
+                exclude: [ 'createdAt', 'updatedAt' ]
+            },
+            include: {
+                model: User,
+                as: 'user',
+                attributes: {
+                    exclude: [ 'createdAt', 'updatedAt', 'password' ]
+                }
             }
         })
         if (!content){
