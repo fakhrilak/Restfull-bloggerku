@@ -22,7 +22,7 @@ router.get('/category',auth, getCategory);
 
 
 router.post('/content',auth,addContent);
-router.get('/content',getContent);
-router.get('/content/:userId',getContentByUser);
+router.get('/content',auth,getContent);
+router.get('/content/:userId',auth,getContentByUser);
 
 module.exports = router;
