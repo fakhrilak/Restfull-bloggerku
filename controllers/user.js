@@ -1,5 +1,4 @@
 const {User}=require('../models')
-const Joi = require('@hapi/joi')
 
 exports.getAllUser = async(req,res)=>{
     try{
