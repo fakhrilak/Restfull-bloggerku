@@ -41,16 +41,15 @@ exports.deletUser = async(req,res)=>{
                 }
             })
         }else{
-            const deletUser = await User.destroy({
+           await User.destroy({
                 where:{
                     id
                 }
             })
-
-            return res.send({
+            return res.status(200).send({
                 data:{
                     massage:'Deleted User',
-                    data:deletUser
+                    data:user.fullname
                 }
             })
         }
