@@ -7,7 +7,7 @@ const { Login, Register, Auth} = require('../controllers/auth');
 
 const {getCategory,addCategory} = require('../controllers/category');
 
-const {getContent,addContent,getContentByUser} = require('../controllers/content');
+const {getContent,addContent,getContentByUser,deleteContent} = require('../controllers/content');
 
 
 
@@ -24,5 +24,6 @@ router.get('/category',getCategory);
 router.post('/content',auth,addContent);
 router.get('/content',auth,getContent);
 router.get('/content/:userId',auth,getContentByUser);
+router.delete('/content/:id',auth,deleteContent);
 
 module.exports = router;

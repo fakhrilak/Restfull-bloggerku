@@ -114,3 +114,40 @@ exports.addContent = async (req,res) =>{
 
     }
 }
+
+exports.deleteContent = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const content = await Content.findOne({
+        where: {
+          id,
+        },
+      });
+  
+      if (content) {
+        await Content.destroy({
+          where: {
+            id,
+          },
+        });
+  
+        return res.send({
+          data: {
+            id,
+          },
+        });
+      } else {
+        return res.status(400).send({
+          message: "Content not Found",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        error: {
+          message: "Server Error",
+        },
+      });
+    }
+  };
+  
